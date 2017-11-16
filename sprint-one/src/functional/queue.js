@@ -3,20 +3,31 @@ var Queue = function() {
 
   // Use an object with numeric keys to store values
   var storage = {};
-  var size = 0;
+  var highestCount = 0;
+  var lowestCount = 0;
 
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
-    size++;
+    if ( value ) {
+      storage[highestCount] = value;
+      highestCount++;
+    }
   };
 
   someInstance.dequeue = function() {
-    size--;
+    if ( highestCount - lowestCount === 0 ) {
+      return 0;
+    }
+
+    var result = storage[lowestCount];
+    delete storage[lowestCount];
+    lowestCount++;
+    return result;
   };
 
   someInstance.size = function() {
-    return size;
+    return highestCount - lowestCount;
   };
 
   return someInstance;
