@@ -18,11 +18,11 @@ var queueMethods = {
 	}, 
 	dequeue: function() {
 		if ( this.last > this.first ) {
-			var value = this.storage[this.first];
+			var data = this.storage[this.first];
 			
 			delete this.storage[this.first];
 			this.first++;
-			return value;
+			return data;
 		}
 	},
 	size: function() {
