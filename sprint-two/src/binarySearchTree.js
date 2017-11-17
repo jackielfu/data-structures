@@ -1,43 +1,74 @@
 var BinarySearchTree = function(value) {
-	// create constructor 
-  // define value
-  // define right 
-  // define left
+  var bst = Object.create(bstMethods);
 
-  // .insert(value)
-    // create new node = value
-    // create recursive function
-      // if currentNode's value > passed-in value && left === undefined
-        // insert currentNode as left
-      // if currentNode's value > passed-in value
-        // recurse currentNode's left child
-      // if currentNode's value < passed-in value && right === undefined
-        // insert currentNode as right
-      // if currentNode's value < passed-in value 
-        // recurse currentNode's right child
-      // ? call recursive function on root node ? 
+  bst.value = value;
+  bst.right = undefined;
+  bst.left = undefined;
 
-  // .contains(value)
+  return bst;
+} 
+
+var bstMethods = {};
+
+  bstMethods.insert = function(value) {
+    var node = BinarySearchTree(value);
+
+    // if currentNode's value > passed-in value && left === undefined
+    if ( this.value > value && this.left === undefined ) {
+    // insert currentNode as left
+      this.left = node;
+    }
+    // if currentNode's value > passed-in value
+    else if ( this.value > value ) {
+      // recurse currentNode's left child
+      this.left.insert(value);
+    }
+    // if currentNode's value < passed-in value && right === undefined
+    else if ( this.value < value && this.right === undefined ) {
+      // insert currentNode as right
+      this.right = node;
+    }
+    // if currentNode's value < passed-in value 
+    else if ( this.value < value ) {
+      // recurse currentNode's right child
+      this.right.insert(value);
+    }
+  }
+    
+  bstMethods.contains = function(target) {
     // create container variable to hold found node
-    // create recursive function
-};
+    var foundNode = false;
+ 
+      // if currentNode's value = value
+      if ( this.value === target ) {
+        // container var = true
+        return foundNode = true;
+      }
+      // else if left === !undefined && value < currentNode's value
+      else if ( this.left && target < this.value ) {
+        // recurse left child
+        return this.left.contains(target);
+      }
+      // else if right === !undefined && value > currentNode's value
+      else if ( this.right && target > this.value ) {
+        // recurse right child
+        return this.right.contains(target);
+      }
+    return foundNode;
+  }
 
+  bstMethods.depthFirstLog = function(callback) {
+    callback(this.value);
+    if ( this.left ) {
+      this.left.depthFirstLog(callback);
+    }
+    if ( this.right ) {
+      this.right.depthFirstLog(callback);
+    }
+  } 
+
+  
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-/*
-	.left
-	.right
-	.insert(value)
-    - performs binary search on root node
-    - moves left if n < currentNode
-    - moves right if n > currentNode
-    - inserts when left or right child does not exist
-	.contains(value)
-    - performs binary search to determine if value exists
-	.depthFirstLog()
-    - accepts callback and applies callback to each value in tree
-    - needs recursion to traverse nodes on tree
-*/
