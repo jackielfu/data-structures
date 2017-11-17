@@ -5,7 +5,8 @@ var LinkedList = function() {
 
   list.addToTail = function(value) {
     var newNode = Node(value);
-    if ( !list.head && !list.tail ){
+    
+    if ( !list.head && !list.tail){
       list.tail = list.head = newNode;
     } else {
       list.tail.next = newNode;
@@ -14,8 +15,8 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
-    if ( !list.head ) {
-      return false;
+    if ( !list.head && !list.tail ) {
+      return;
     }
     var removed = list.head.value;
     list.head = list.head.next;
@@ -24,15 +25,14 @@ var LinkedList = function() {
 
   list.contains = function(target) {
     var currentNode = list.head;
-
     while( currentNode ){
       if ( currentNode.value === target ){
         return true;
       }
       currentNode = currentNode.next;
     }
+    return false;
   };
-
   return list;
 };
 
