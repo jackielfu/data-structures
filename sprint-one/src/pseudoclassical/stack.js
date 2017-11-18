@@ -13,8 +13,8 @@ Stack.prototype.pop = function() {
   
   if ( this.count ) {
 
-    data = this.storage[this.count];
-    delete this.storage[this.count];
+    data = this.storage[this.count-1];
+    delete this.storage[this.count-1];
     this.count--;
 
     return data;

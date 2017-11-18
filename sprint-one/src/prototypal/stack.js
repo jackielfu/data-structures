@@ -13,13 +13,10 @@ var stackMethods = {
 	},
 
 	pop: function() {
-		var data = 0;
-		
 		if (this.count) {
-			data = this.storage[this.count];
-			delete this.storage[this.count];
+			var data = this.storage[this.count-1];
+			delete this.storage[this.count-1];
 			this.count--;
-
 			return data;
 		}
 	},
